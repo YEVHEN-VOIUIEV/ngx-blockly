@@ -1,1 +1,3 @@
-<input (change)="create($event)" />
+<input (change)="changeName($event)" value="{{ application.name }}" />
+
+<button (click)="save()">Save</button>

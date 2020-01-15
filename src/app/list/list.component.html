@@ -1,5 +1,7 @@
 <a [routerLink]="'create'">Create</a>
 
 <ul>
-  <li *ngFor="let item of items">{{ item.name }}</li>
+  <li *ngFor="let item of items" (click)="select(item.name)">
+    {{ item.name }}
+  </li>
 </ul>
