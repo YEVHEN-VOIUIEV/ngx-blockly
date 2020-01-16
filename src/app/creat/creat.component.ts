@@ -35,10 +35,23 @@ export class CreatComponent implements OnInit {
   ngOnInit() {
     this.workspace = Blockly.inject('blocklyDiv', {
       toolbox: document.getElementById('toolbox'),
-      scrollbars: false
+      scrollbars: false,
+      grid: { spacing: 20, length: 3, colour: '#ccc', snap: true },
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+      },
+      move: {
+        scrollbars: true,
+        drag: true,
+        wheel: false
+      },
+      trashcan: true
     });
-
-    debugger;
 
     if (this.application.source) {
       this.workspace.clear();
@@ -54,11 +67,13 @@ export class CreatComponent implements OnInit {
   }
 
   save(): void {
-    this.application.source = Blockly.Xml.domToText(
-      Blockly.Xml.workspaceToDom(this.workspace)
-    );
+    if (this.application.name) {
+      this.application.source = Blockly.Xml.domToText(
+        Blockly.Xml.workspaceToDom(this.workspace)
+      );
 
-    this.dataService.add(this.application);
+      this.dataService.add(this.application);
+    }
 
     this.router.navigate(['applications']);
   }

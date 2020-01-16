@@ -1,21 +1,42 @@
-<input (change)="changeName($event)" value="{{ application.name }}" />
+<button (click)="save()">Save</button> -
 
-<button (click)="save()">Save</button>
+<ng-template [ngIf]="application.source">
+  <h2>{{ application.name }}</h2>
+</ng-template>
+<ng-template [ngIf]="!application.source">
+  <input (change)="changeName($event)" value="{{ application.name }}" />
+</ng-template>
 
 <div id="blocklyDiv" style="width: 100%; height: 100%"></div>
 <xml id="toolbox" style="display: none">
   <category name="Control" colour="120">
+    <label text="A label" web-class="myLabelStyle"></label>
     <block type="controls_if"></block>
-    <block type="controls_repeat_ext" disabled="true"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="controls_whileUntil"></block>
+    <block type="logic_compare"></block>
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+    <block type="math_single" disabled="true"></block>
+  </category>
+  <category name="Logic">
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_boolean"></block>
+    <block type="logic_negate"></block>
   </category>
   <category name="Text" colour="230">
     <block type="text"></block>
     <block type="text_print"></block>
   </category>
-  <!-- <category name="Custom" colour="360">
+  <category name="Custom" colour="360">
     <block type="begin"></block>
     <block type="move"></block>
     <block type="end"></block>
-  </category> -->
+    <block type="string_length"></block>
+    <block type="math_change"></block>
+  </category>
   <category name="Variables" colour="330" custom="VARIABLE"></category>
 </xml>
